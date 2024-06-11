@@ -4,20 +4,18 @@ class Library {
 
   #name;
   #inventory = [];
-  #totalWords;
-  #wordCount;
 
   constructor(name) {
     this.setName(name);
   }
 
   setName(name) {
-    if (typeof (name) !== "string") {
-      throw new Error()
+    if (typeof (name) !== 'string') {
+      throw new Error();
     }
     name = name.trim();
     if (name.length === 0) {
-      throw new Error()
+      throw new Error();
     }
     this.#name = name;
   }
@@ -26,8 +24,8 @@ class Library {
     return this.#name;
   }
 
-  addBook(title, author, pages) {
-    const newBook = new Book(title, author, pages);
+  addBook(title, author, pages, words) {
+    const newBook = new Book(title, author, pages, words);
     this.#inventory.push(newBook);
   }
 
@@ -40,7 +38,11 @@ class Library {
   }
 
   totalWords() {
-    // TODO
+    let total = 0;
+    for (const book of this.#inventory){
+      total += book.getWords();
+    }
+    return total;
   }
 }
 
